@@ -54,7 +54,7 @@ class DeviceLivewire extends Component
     }
     public function render()
     {
-        dd($this->lastLocation = LocationHistory::where('device_id', $this->device_id)->get()->last());
+        $this->lastLocation = LocationHistory::where('device_id', $this->device_id)->get()->last();
         // $this->device_name = Device::where('id', $this->device_id)->get();
 
         $user = User::find(Auth::user()->id);

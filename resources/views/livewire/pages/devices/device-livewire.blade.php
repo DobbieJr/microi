@@ -28,7 +28,7 @@
                             </x-modal>
                             <div class=" d-flex justify-content-end">
                                 <div class="btn-group">
-                                    <button type="button" onclick="updatemap({{$lastLocation->lati}},{{$lastLocation->long}},'{{$lastLocation->device->name}}')" class="btn btn-outline-success "
+                                    <button type="button" onclick="updatemap({{$lastLocation->lati ?? 0}},{{$lastLocation->long ?? 0}},'{{$lastLocation->device->name ?? 'No Device History'}}')" class="btn btn-outline-success "
                                         aria-haspopup="true" aria-expanded="false">
                                         Find Device <i class="fa fa-map-marker" aria-hidden="true"></i>
                                     </button>
