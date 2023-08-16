@@ -20,6 +20,8 @@ class ProfileLivewire extends Component
     public $new_password;
     public $photo;
     public $user;
+    public $desc;
+    public $occup;
 
 
     public function remove()
@@ -57,7 +59,9 @@ class ProfileLivewire extends Component
 
         $this->validate([
             'name' => 'required|string',
-            'email' => 'required|email'
+            'email' => 'required|email',
+            'occup' => 'required|string',
+            'desc' => 'required|string'
         ]);
         $user = User::find(Auth::user()->id);
 
@@ -76,6 +80,8 @@ class ProfileLivewire extends Component
                 $user->password = Hash::make($this->new_password);
                 $user->name = $this->name;
                 $user->email = $this->email;
+                $user->occupation = $this->occup;
+                $user->description = $this->desc;
                 $user->save();
                 $this->alert('success', 'Successful');
                 // dd('start is true');

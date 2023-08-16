@@ -19,15 +19,19 @@
                                 <img src="{{ asset('assets/uploads/' . $user->profile_picture) }}"
                                     class="border rounded-circle" width="150" height="150" alt="User Image">
                                 <br />
-                                <button class="btn btn-dark" onclick="document.getElementById('photo_field').click();">Upload <div wire:loading wire:target='photo'>
+                                <button class="btn btn-dark"
+                                    onclick="document.getElementById('photo_field').click();">Upload <div wire:loading
+                                        wire:target='photo'>
                                         <span class="spinner-border spinner-border-sm " role="status"
                                             aria-hidden="true"></span>
                                     </div></button>
-                                <button class="btn btn-danger" wire:click='remove'> Remove<div wire:loading wire:target='remove'>
+                                <button class="btn btn-danger" wire:click='remove'> Remove<div wire:loading
+                                        wire:target='remove'>
                                         <span class="spinner-border spinner-border-sm " role="status"
                                             aria-hidden="true"></span>
                                     </div></button>
-                                <div class="form-group"> <input type="file" wire:model='photo' id='photo_field' hidden>
+                                <div class="form-group"> <input type="file" wire:model='photo' id='photo_field'
+                                        hidden>
                                     @error('photo')
                                         <span class='text-danger'>{{ $message }}</span>
                                     @enderror
@@ -49,6 +53,23 @@
                                     <input type="email" wire:model.defer='email' class="form-control"
                                         autocomplete="false">
                                     @error('email')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Occupation</label>
+                                    <input type="text" wire:model.defer='occup' class="form-control"
+                                        autocomplete="false">
+                                    @error('occup')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Description</label>
+                                    <input type="text" wire:model.defer='desc' class="form-control"
+                                        autocomplete="false">
+                                    @error('desc')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>

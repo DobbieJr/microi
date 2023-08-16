@@ -16,8 +16,48 @@ class UserTableSeeder extends Seeder
     {
         //
         User::create([
-            'name' => 'admin',
+            'name' => 'Dumisani Kaliati',
             'email' => 'admin@admin.com',
+            'role' => 'admin',
+            'password' => Hash::make('root')
+        ]);
+        User::create([
+            'name' => 'Elijah Kawinga',
+            'email' => 'ej@admin.com',
+            'role' => 'admin',
+            'occupation' => 'Senior Systems Developer',
+            'description' => 'Skilled programmer with more than 50 projects completed successfully and over a decade of expirience.',
+            'password' => Hash::make('root')
+        ]);
+        User::create([
+            'name' => 'Allan Mpate',
+            'email' => 'allan@admin.com',
+            'role' => 'admin',
+            'password' => Hash::make('root')
+        ]);
+        User::create([
+            'name' => 'Andrew Mpate',
+            'email' => 'andrew@admin.com',
+            'role' => 'admin',
+            'occupation' => '',
+            'description' => 'Skilled programmer with more than 50 projects completed successfully and over a decade of expirience.',
+            'password' => Hash::make('root')
+        ]);
+        User::create([
+            'name' => 'Tresfore Gawani',
+            'email' => 'gawani@admin.com',
+            'role' => 'admin',
+            'password' => Hash::make('root')
+        ]);
+        User::create([
+            'name' => 'Katie Kathiwe Mtambo',
+            'email' => 'katie@admin.com',
+            'role' => 'admin',
+            'password' => Hash::make('root')
+        ]);
+        User::create([
+            'name' => 'Dobbins Jr Kachitsa',
+            'email' => 'dobbins@admin.com',
             'role' => 'admin',
             'password' => Hash::make('root')
         ]);

@@ -140,10 +140,9 @@
                                     style="background-image: url(' @if( $item->profile_picture == "") {{ asset('face-0.jpg') }}  @else {{ asset('assets/uploads/' . $item->profile_picture) }} @endif')">
                                 </div>
                                 <div class="text pt-4">
-                                    <p class="mb-4">Far far away, behind the word mountains, far from the countries
-                                        Vokalia and Consonantia, there live the blind texts.</p>
+                                    <p class="mb-4">{{$item->description}}</p>
                                     <p class="name">{{$item->name}}</p>
-                                    <span class="position">Marketing Manager</span>
+                                    <span class="position">{{$item->occupation}}</span>
                                 </div>
                             </div>
                         </div>
@@ -151,58 +150,7 @@
                             
                         @endforelse
                        
-                        <div class="item">
-                            <div class="testimony-wrap rounded text-center py-4 pb-5">
-                                <div class="user-img mb-2"
-                                    style="background-image: url('{{ asset('landing page/images/person_2.jpg') }}')">
-                                </div>
-                                <div class="text pt-4">
-                                    <p class="mb-4">Far far away, behind the word mountains, far from the countries
-                                        Vokalia and Consonantia, there live the blind texts.</p>
-                                    <p class="name">Roger Scott</p>
-                                    <span class="position">Interface Designer</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimony-wrap rounded text-center py-4 pb-5">
-                                <div class="user-img mb-2"
-                                    style="background-image: url('{{ asset('landing page/images/person_3.jpg') }}')">
-                                </div>
-                                <div class="text pt-4">
-                                    <p class="mb-4">Far far away, behind the word mountains, far from the countries
-                                        Vokalia and Consonantia, there live the blind texts.</p>
-                                    <p class="name">Roger Scott</p>
-                                    <span class="position">UI Designer</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimony-wrap rounded text-center py-4 pb-5">
-                                <div class="user-img mb-2"
-                                    style="background-image: url('{{ asset('landing page/images/person_1.jpg') }}')">
-                                </div>
-                                <div class="text pt-4">
-                                    <p class="mb-4">Far far away, behind the word mountains, far from the countries
-                                        Vokalia and Consonantia, there live the blind texts.</p>
-                                    <p class="name">Roger Scott</p>
-                                    <span class="position">Web Developer</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimony-wrap rounded text-center py-4 pb-5">
-                                <div class="user-img mb-2"
-                                    style="background-image: url('{{ asset('landing page/images/person_1.jpg') }}')">
-                                </div>
-                                <div class="text pt-4">
-                                    <p class="mb-4">Far far away, behind the word mountains, far from the countries
-                                        Vokalia and Consonantia, there live the blind texts.</p>
-                                    <p class="name">Roger Scott</p>
-                                    <span class="position">System Analyst</span>
-                                </div>
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
             </div>

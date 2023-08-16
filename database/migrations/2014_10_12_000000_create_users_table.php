@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('status')->default('active');
             $table->string('password');
             $table->string('profile_picture')->nullable();
-            $table->string('map_key')->nullable();
+            $table->string('occupation')->nullable();
+            $table->string('description')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
