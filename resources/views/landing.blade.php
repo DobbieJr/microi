@@ -133,19 +133,24 @@
             <div class="row ftco-animate">
                 <div class="col-md-12">
                     <div class="carousel-testimony owl-carousel ftco-owl">
-                        <div class="item">
+                        @forelse ($team as $item )
+                             <div class="item">
                             <div class="testimony-wrap rounded text-center py-4 pb-5">
                                 <div class="user-img mb-2"
-                                    style="background-image: url('{{ asset('landing page/images/person_1.jpg') }}')">
+                                    style="background-image: url(' @if( $item->profile_picture == "") {{ asset('face-0.jpg') }}  @else {{ asset('assets/uploads/' . $item->profile_picture) }} @endif')">
                                 </div>
                                 <div class="text pt-4">
                                     <p class="mb-4">Far far away, behind the word mountains, far from the countries
                                         Vokalia and Consonantia, there live the blind texts.</p>
-                                    <p class="name">Roger Scott</p>
+                                    <p class="name">{{$item->name}}</p>
                                     <span class="position">Marketing Manager</span>
                                 </div>
                             </div>
                         </div>
+                        @empty
+                            
+                        @endforelse
+                       
                         <div class="item">
                             <div class="testimony-wrap rounded text-center py-4 pb-5">
                                 <div class="user-img mb-2"
