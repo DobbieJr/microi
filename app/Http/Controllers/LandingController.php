@@ -11,7 +11,7 @@ class LandingController extends Controller
     public function index()
     {
         $u =  User::where('role','admin')->get();
-        dd($us);
+        dd($u);
         return view('landing');
     }
 }
