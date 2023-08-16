@@ -27,12 +27,13 @@
     <link rel="stylesheet" href="{{ asset('landing page/css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('landing page/css/icomoon.css') }}">
     <link rel="stylesheet" href="{{ asset('landing page/css/style.css') }}">
+<link rel="stylesheet" href="{{asset('landing page/webfonts/uicons-solid-straight.css')}}">
 </head>
 
 <body data-spy="scroll" data-target="#navbar-example2" data-offset="0">
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="index.html">Micro<span>Eye </span></a>
+            <a class="navbar-brand" href="{{ route('landing') }}">Micro<span>Eye </span></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
@@ -41,7 +42,6 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item "><a href="index.html" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
                     <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
                     {{-- <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li> --}}
@@ -53,11 +53,11 @@
                             <li class="nav-item px-1"><a href="{{ route('home') }}" class="btn btn-success">Dashboard</a>
                             </li>
                         @else
-                            <li class="nav-item"><a href="{{ route('login') }}" class="btn btn-outline-success">Log in</a>
+                            <li class="nav-item"><a href="{{ route('login') }}" class="btn btn-sm btn-outline-success ">Log in</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item px-1"><a href="{{ route('register') }}"
-                                        class="btn btn-success">Register</a></li>
+                                        class="btn btn-sm btn-success">Register</a></li>
                             @endif
                         @endauth
                     @endif
@@ -72,7 +72,7 @@
             <div class="row mb-5">
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2"><a href="#" class="logo">Car<span>book</span></a></h2>
+                        <h2 class="ftco-heading-2"><a href="#" class="logo">Micro<span>Mek</span></a></h2>
                         <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
                             there
                             live the blind texts.</p>
@@ -132,9 +132,8 @@
                         Copyright &copy;
                         <script>
                             document.write(new Date().getFullYear());
-                        </script> All rights reserved | This template is made with <i
-                            class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                            target="_blank">Colorlib</a>
+                        </script>Micromek All rights reserved | made by <a href="https://micromek.net"
+                            target="_blank">Techlink360</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
                 </div>

@@ -8,8 +8,9 @@
                 <div class="col-lg-8 ftco-animate">
                     <div class="text w-100 text-center mb-md-5 pb-md-5">
                         <h1 class="mb-4">Fast &amp; Easy Way To Track Your Car</h1>
-                        <p style="font-size: 18px;">A small river named Duden flows by their place and supplies it with the
-                            necessary regelialia. It is a paradisematic country, in which roasted parts</p>
+                        <p style="font-size: 18px;">MicroEye is a car tracking system developed by MicroMek that uses GPS to
+                            not only track your
+                            vehicles real time location but its condition as well </p>
                         <a href="{{ route('register') }}" class="btn btn-success">Join Us</a>
                         {{-- <a href="https://vimeo.com/45830194"
                             class="icon-wrap popup-vimeo d-flex align-items-center mt-4 justify-content-center">
@@ -29,12 +30,12 @@
         <div class="container">
             <div class="row no-gutters">
                 <div class="col-md-6 p-md-5 img img-2 d-flex justify-content-center align-items-center"
-                    style="background-image: url('{{ asset('landing page/images/about.jpg') }}');">
+                    style="background-image: url('{{ asset('illustrations/its here.jpg') }}');">
                 </div>
                 <div class="col-md-6 wrap-about ftco-animate">
                     <div class="heading-section heading-section-white pl-md-5">
                         <span class="subheading">About us</span>
-                        <h2 class="mb-4">Welcome to MicroEye</h2>
+                        <h2 class="mb-4">What is Micromek?</h2>
 
                         <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It
                             is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
@@ -61,8 +62,9 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="services services-2 w-100 text-center">
-                        <div class="icon d-flex align-items-center justify-content-center"><span
-                                class="flaticon-wedding-car"></span></div>
+                        <div class="icon d-flex align-items-center justify-content-center">
+                            <span class="fi-ss-drone-front"></span>
+                        </div>
                         <div class="text w-100">
                             <h3 class="heading mb-2">Wedding Ceremony</h3>
                             <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.
@@ -124,8 +126,8 @@
         <div class="container">
             <div class="row justify-content-center mb-5">
                 <div class="col-md-7 text-center heading-section ftco-animate">
-                    <span class="subheading">Testimonial</span>
-                    <h2 class="mb-3">Happy Clients</h2>
+                    <span class="subheading">Meet</span>
+                    <h2 class="mb-3 text-success">THE TEAM</h2>
                 </div>
             </div>
             <div class="row ftco-animate">
@@ -242,5 +244,4 @@
             </div>
         </div>
     </section>
-
 @endsection

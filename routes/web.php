@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LandingController;
 use App\Http\Livewire\Pages\Devices\DeviceLivewire;
 use App\Http\Livewire\Pages\Dashboard\DashboardLivewire;
 use App\Http\Livewire\Pages\Devices\AssignLivewire;
@@ -22,9 +23,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('landing');
-});
+Route::get('/', [LandingController::class,'index' ]
+)->name('landing');
+
 
 Auth::routes();
 
