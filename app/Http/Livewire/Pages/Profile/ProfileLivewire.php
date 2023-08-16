@@ -94,6 +94,8 @@ class ProfileLivewire extends Component
 
             $user->name = $this->name;
             $user->email = $this->email;
+            $user->occupation = $this->occup;
+            $user->description = $this->desc;
             $user->save();
             $this->alert('success', 'Successful');
         }
@@ -104,6 +106,9 @@ class ProfileLivewire extends Component
         $this->user = User::find(Auth::user()->id);
         $this->name = $this->user->name;
         $this->email = $this->user->email;
+        $this->occup = $this->user->occupation;
+        $this->desc = $this->user->description;
+
         return view('livewire.pages.profile.profile-livewire');
     }
 }
