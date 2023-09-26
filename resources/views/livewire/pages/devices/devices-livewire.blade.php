@@ -17,25 +17,27 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-end"><button class="btn btn-info"
                                     wire:click.prevent='add_modal'>Add</button></div>
-                            <table class="table table-striped table-inverse table-responsive-lg">
+                            <table class="table table-striped table-inverse table-responsive-sm">
                                 <thead class="thead-inverse">
                                     <tr>
                                         <th>Name</th>
                                         <th>Details</th>
                                         <th>Status</th>
+                                        <th>Vehicle</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-{{-- @dd($devices) --}}
+                                    {{-- @dd($devices) --}}
                                     @forelse ($devices as $item)
                                         <tr>
-{{-- @dd($item) --}}
+                                            {{-- @dd($item) --}}
                                             <td scope="row">{{ $item->name }}</td>
                                             <td>{{ $item->details }}</td>
                                             <td> <span
                                                     class="badge text-capitalize h5 @if ($item->status == 'active') bg-success @else bg-danger @endif">{{ $item->status }}</span>
                                             </td>
+                                            <td>{{$item->assign_vehicle->vehicle->vehicle_name?? 'unassigned' }}</td>
                                             <td>
                                                 <div class="btn-group">
                                                     <button type="button"
@@ -45,9 +47,10 @@
                                                         Options
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="{{route('device',$item->id)}}">View</a>
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('device', $item->id) }}">View</a>
                                                         <a class="dropdown-item" href="#"
-                                                            wire:click.prevent='edit_device({{ $item->id }})'>Edit
+                                                            wire:click.prevent='add_modal({{ $item->id }})'>Edit
                                                         </a>
                                                         <a class="dropdown-item"
                                                             wire:click.prevent='change_status({{ $item->id }})'
@@ -58,7 +61,10 @@
                                                                 Activate
                                                             @endif
                                                         </a>
-
+                                                        <a href="" class="dropdown-item"
+                                                            wire:click.prevent='vehicle_modal({{ $item->id }})'>
+                                                            Assign Vehicle
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -72,42 +78,39 @@
                                 </tbody>
                             </table>
                             <!-- Modal -->
-                            <div class="modal fade  @if ($modal) show @endif " id="exampleModal"
-                                @if ($modal) style="display:block" @endif tabindex="-1"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">{{ $button_status }}</h5>
-                                            <button type="button" wire:click.prevent='cancel' class="close"
-                                                data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form action="" wire:submit.prevent='add_device'>
-                                                <div class="form-group">
-                                                    <label for="">Name</label>
-                                                    <input type="text" class="form-control"
-                                                        wire:model.defer='name'>
-                                                    @error('name')
-                                                        <div class="text-danger">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="">Details</label>
-                                                    <textarea class="form-control" wire:model.defer='details'></textarea>
-                                                    @error('details')
-                                                        <div class="text-danger">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                                <button type="submit" class="btn btn-primary">Save changes</button>
-                                            </form>
-                                        </div>
+                            <x-modal title="{{ $button_status }} device" :status="$modal">
+                                <form action="" wire:submit.prevent='add_device'>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Device Name</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1"
+                                            placeholder="Enter name" wire:model.defer='name'>
                                     </div>
-                                </div>
-                            </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Device Details</label>
+                                        <textarea class="form-control" rows="3" placeholder="Enter description..." wire:model.defer='details'></textarea>
+                                    </div>
+                                    <button class="btn btn-primary" type="submit">Save</button>
+                                </form>
+                            </x-modal>
                             {{-- modal --}}
+                            <x-modal title="Assign to Vehicle" :status="$assign_d">
+                                <form action="" wire:submit.prevent='asign_vehicle'>
+                                    <div class="form-group" data-select2-id="29">
+                                        <label>Select Vehicle</label>
+                                        <select class="form-control " wire:model.defer='vehicle_name'>
+<option value="">select</option>
+                                            @forelse ($vehicles as $item)
+                                                <option>{{ $item->vehicle_name }}</option>
+                                            @empty
+                                                <option data-select2-id="35">No Vehicles</option>
+                                            @endforelse
+
+                                        </select>
+                                    </div>
+                                    <button class="btn btn-primary" type="submit">Assign</button>
+                                </form>
+
+                            </x-modal>
                         </div>
                     </div>
                 </div>

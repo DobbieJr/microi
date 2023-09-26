@@ -40,7 +40,7 @@ class UserTableSeeder extends Seeder
             'email' => 'andrew@admin.com',
             'role' => 'admin',
             'occupation' => '',
-            'description' => 'Skilled programmer with more than 50 projects completed successfully and over a decade of expirience.',
+            'description' => '',
             'password' => Hash::make('root')
         ]);
         User::create([

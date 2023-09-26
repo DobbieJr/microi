@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body ">
                             <div class="d-flex justify-content-end ">
                                 <div class="col-lg-3">
                                     <div class="form-group">
@@ -22,7 +22,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <table class="table table-hover table-inverse table-responsive-lg ">
+                            <table class="table table-hover table-inverse table-responsive-sm " >
                                 <thead class="thead-inverse">
                                     <tr>
                                         <th>Name</th>

@@ -20,6 +20,7 @@ class DeviceLivewire extends Component
     public $lat, $long;
     public $lastLocation;
     public $device_name;
+    public $location;
 
     public function find()
     {
@@ -38,15 +39,6 @@ class DeviceLivewire extends Component
         $this->reset(['api_modal', 'qr_modal']);
     }
 
-    public function updatedApiKey()
-    {
-        $this->validate(['api_key' => 'required|string']);
-        $this->user = User::find(Auth::user()->id);
-        $this->user->map_key = $this->api_key;
-        $this->user->save();
-        $this->alert('success', 'Api added!');
-    }
-
     public function mount($id)
     {
         $this->device_id = $id;
@@ -58,7 +50,6 @@ class DeviceLivewire extends Component
         // $this->device_name = Device::where('id', $this->device_id)->get();
 
         $user = User::find(Auth::user()->id);
-        $this->api_key = $user->map_key;
         return view('livewire.pages.devices.device-livewire');
     }
 }

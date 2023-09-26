@@ -5,15 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Device extends Model
+class UserInvites extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name',
-        'details'
+        'user_id',
+        'org_id',
+        'short_message',
+        'mail_to'
     ];
-    public function assign_vehicle()
+    public function user()
     {
-        return $this->hasOne(AssignDevice::class, 'device_id');
+       return $this->belongsTo(User::class,'user_id');
     }
 }

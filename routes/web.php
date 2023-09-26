@@ -6,10 +6,15 @@ use App\Http\Livewire\Pages\Dashboard\DashboardLivewire;
 use App\Http\Livewire\Pages\Devices\AssignLivewire;
 use App\Http\Livewire\Pages\Devices\DevicesLivewire;
 use App\Http\Livewire\Pages\Devices\PublicDeviceLivewire;
+use App\Http\Livewire\Pages\Invites\InvitesLivewire;
 use App\Http\Livewire\Pages\Location\LocationHistoryLivewire;
+use App\Http\Livewire\Pages\Organisations\OrganisationsLivewire;
+use App\Http\Livewire\Pages\Organisations\OrganisationLivewire;
+use App\Http\Livewire\Pages\Organisations\OrgUserLivewire;
 use App\Http\Livewire\Pages\Profile\ProfileLivewire;
 use App\Http\Livewire\Pages\Users\UsersLivewire;
-
+use App\Http\Livewire\Pages\Vehicles\VehicleLivewire;
+use App\Http\Livewire\Pages\Vehicles\VehiclesLivewire;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,24 +28,38 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [LandingController::class,'index' ]
+Route::get(
+    '/',
+    [LandingController::class, 'index']
 )->name('landing');
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::middleware(['validateRole'])->group(function () {
         Route::get('/users', UsersLivewire::class)->name('users');
         Route::get('/devices', DevicesLivewire::class)->name('devices');
         Route::get('/devices/device/assign/{id}', AssignLivewire::class)->name('assign');
         Route::get('/devices/device/location/{id}', LocationHistoryLivewire::class)->name('location.history');
+        Route::get('/devices/device/{id}', DeviceLivewire::class)->name('device');
+        Route::get('/devices/public/device/{id}', PublicDeviceLivewire::class)->name('public.device');
+        Route::get('/organisations/organisations', OrganisationsLivewire::class)->name('organisations');
+        Route::get('/organisations/organisation/{id}', OrganisationLivewire::class)->name('organisation');
+        Route::get('/organisations/organisation/{id}/users', OrgUserLivewire::class)->name('organisation.users');
+        Route::get('/organisation/{id}/vehicles', VehiclesLivewire::class)->name('vehicles');
+        Route::get('organisation/vehicles/vehicle/{id}', VehicleLivewire::class)->name('vehicle');
+        Route::get('home/invites', InvitesLivewire::class)->name('invites');
     });
     Route::get('/home', DashboardLivewire::class)->name('home');
     Route::get('/profile', ProfileLivewire::class)->name('profile');
-    Route::get('/devices/device/{id}', DeviceLivewire::class)->name('device');
-    Route::get('/devices/public/device/{id}', PublicDeviceLivewire::class)->name('public.device');
+    Route::get('/organisations/organisations', OrganisationsLivewire::class)->name('organisations');
+    Route::get('/organisations/organisation/{id}', OrganisationLivewire::class)->name('organisation');
+    Route::get('/organisations/organisation/{id}/users', OrgUserLivewire::class)->name('organisation.users');
+    Route::get('/organisation/{id}/vehicles', VehiclesLivewire::class)->name('vehicles');
+    Route::get('organisation/vehicles/vehicle/{id}', VehicleLivewire::class)->name('vehicle');
+    Route::get('home/invites', InvitesLivewire::class)->name('invites');
 });
 
 

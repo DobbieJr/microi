@@ -2,27 +2,27 @@
 
 namespace App\Http\Livewire\Pages\Devices;
 
+use App\Models\AssignDevice;
 use App\Models\Device;
+use App\Models\DeviceVehicle;
+use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class DevicesLivewire extends Component
 {
     use LivewireAlert;
-    public $name, $details;
+    public $name;
+    public $details;
     public $modal = false;
     public $devices = [];
     public $button_status = 'add';
     public $device;
+    public $vehicle_name;
+    public $vehicle_id;
+    public $assign_d = false;
 
-    public function edit_device($id)
-    {
-        $this->device = Device::find($id);
-        $this->name = $this->device->name;
-        $this->details = $this->device->details;
-        $this->button_status = "edit";
-        $this->modal = true;
-    }
+
     public function change_status($id)
     {
         $this->device = Device::find($id);
@@ -36,14 +36,29 @@ class DevicesLivewire extends Component
             $this->alert('success', 'updated successfuly');
         }
     }
-    public function add_modal()
+    public function add_modal($id = null)
     {
+        if ($id == null) {
+            $this->button_status = 'add';
+        } else {
+            $this->button_status = 'edit';
+            $this->device = Device::find($id);
 
+            $this->name = $this->device->name;
+            $this->details = $this->device->details;
+        }
         $this->modal = true;
     }
     public function cancel()
     {
-        $this->reset(['modal', 'name', 'details', 'button_status']);
+        $this->reset([
+            'modal',
+            'name',
+            'details',
+            'button_status',
+            'assign_d',
+            'vehicle_name'
+        ]);
     }
     public function add_device()
     {
@@ -67,9 +82,30 @@ class DevicesLivewire extends Component
             $this->alert('success', 'Updated successfuly');
         }
     }
+    public function vehicle_modal($id)
+    {
+        $this->vehicle_id = $id;
+        $this->assign_d = true;
+    }
+    public function asign_vehicle()
+    {
+        $this->validate(['vehicle_name' => 'required']);
+
+
+
+
+        AssignDevice::create([
+            'user_id' => Auth::user()->id,
+            'device_id' => $this->vehicle_id,
+            'vehicle_id' => DeviceVehicle::where('vehicle_name', $this->vehicle_name)->get()->value('id')
+        ]);
+        $this->cancel();
+        $this->alert('success', 'Updated successfully');
+    }
     public function render()
     {
         $this->devices = Device::all();
-        return view('livewire.pages.devices.devices-livewire');
+        $vehicles = DeviceVehicle::all();
+        return view('livewire.pages.devices.devices-livewire')->with('vehicles', $vehicles);
     }
 }

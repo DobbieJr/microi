@@ -25,7 +25,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini" >
     <div class="wrapper">
 
         <!-- Navbar -->
@@ -35,7 +35,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Main Sidebar Container -->
         @livewire('layout.aside.left-nav-livewire')
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="background-image: url('{{ asset('landing page/images/3d-view-map.jpg') }}'); background-size:cover; overflow:visible;">
             <!-- Content Header (Page header) -->
             {{ $slot }}
             <!-- /.content -->

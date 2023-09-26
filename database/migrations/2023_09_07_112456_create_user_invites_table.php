@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('assign_devices', function (Blueprint $table) {
+        Schema::create('user_invites', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->integer('device_id');
-            $table->integer('vehicle_id');
+            $table->integer('org_id');
+            $table->string('status')->default('rejected');
+            $table->string('mail_to');
+            $table->boolean('seen')->default(0);
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('assign_devices');
+        Schema::dropIfExists('user_invites');
     }
 };
