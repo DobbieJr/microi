@@ -37,7 +37,7 @@
                                             <td> <span
                                                     class="badge text-capitalize h5 @if ($item->status == 'active') bg-success @else bg-danger @endif">{{ $item->status }}</span>
                                             </td>
-                                            <td>{{$item->assign_vehicle->vehicle->vehicle_name?? 'unassigned' }}</td>
+                                            <td>{{ $item->assign_vehicle->vehicle->vehicle_make ?? 'unassigned' }}</td>
                                             <td>
                                                 <div class="btn-group">
                                                     <button type="button"
@@ -97,10 +97,10 @@
                                 <form action="" wire:submit.prevent='asign_vehicle'>
                                     <div class="form-group" data-select2-id="29">
                                         <label>Select Vehicle</label>
-                                        <select class="form-control " wire:model.defer='vehicle_name'>
-<option value="">select</option>
+                                        <select class="form-control " wire:model.defer='vehicle_make'>
+                                            <option value="">select</option>
                                             @forelse ($vehicles as $item)
-                                                <option>{{ $item->vehicle_name }}</option>
+                                                <option>{{ $item->vehicle_make }}</option>
                                             @empty
                                                 <option data-select2-id="35">No Vehicles</option>
                                             @endforelse

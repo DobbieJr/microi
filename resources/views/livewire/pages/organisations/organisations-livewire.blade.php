@@ -32,14 +32,17 @@
                                 </form>
                             </x-modal>
                             <div class="d-flex justify-content-end">
-                                <div class="form-group">
-                                    <input type="text" wire:model='search' class="form-control" placeholder="Search">
-                                </div>
+                                @if (Auth::user()->role == 'systems admin')
+                                    <div class="form-group">
+                                        <input type="text" wire:model='search' class="form-control"
+                                            placeholder="Search">
+                                    </div>
+                                    <div class="form-group">
+                                        <button wire:click.prevent="open_modal"
+                                            class="btn btn-info form-control">Add</button>
+                                    </div>
+                                @endif
 
-                                <div class="form-group">
-                                    <button wire:click.prevent="open_modal"
-                                        class="btn btn-info form-control">Add</button>
-                                </div>
                             </div>
                             <table class="table table-striped table-inverse table-responsive-sm">
                                 <thead class="thead-inverse">
@@ -58,7 +61,7 @@
                                             <td> <span
                                                     class="badge text-capitalize h5 @if ($item->status == 'active') bg-success @else bg-danger @endif">{{ $item->status }}</span>
                                             </td>
-                                            @if (Auth::user()->role == 'admin')
+                                            @if (Auth::user()->role == 'systems admin')
                                                 <td>
                                                     <div class="btn-group">
                                                         <button type="button"

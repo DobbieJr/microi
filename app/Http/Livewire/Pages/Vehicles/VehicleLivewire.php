@@ -9,7 +9,8 @@ class VehicleLivewire extends Component
 {
     public $vehicle;
     public $vehicle_id;
-    public $vehicle_name;
+    public $vehicle_make;
+    public $vehicle_conditon = 50;
 
     public function mount($id)
     {
@@ -17,8 +18,8 @@ class VehicleLivewire extends Component
     }
     public function render()
     {
-        $this->vehicle_name = DeviceVehicle::where('id', $this->vehicle_id)->get()->value('vehicle_name');
-        $this->vehicle = DeviceVehicle::where('id', $this->vehicle_id)->get();
+        $this->vehicle_make = DeviceVehicle::where('id', $this->vehicle_id)->get()->value('vehicle_make');
+        $this->vehicle = DeviceVehicle::find($this->vehicle_id);
         return view('livewire.pages.vehicles.vehicle-livewire');
     }
 }

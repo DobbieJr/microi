@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">{{Auth::user()->name}}'s Dashboard</h1>
+                    <h1 class="m-0">{{ Auth::user()->name }}'s Dashboard</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -24,14 +24,14 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>5</h3>
+                            <h3>{{ $vehicles->count() }}</h3>
 
                             <p>vehicles registered</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>
                         </div>
-                        <a href="{{ route('vehicles') }}" class="small-box-footer">More info <i
+                        <a href="{{ route('all.vehicles') }}" class="small-box-footer">More info <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
@@ -56,9 +56,9 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>44</h3>
+                            <h3>{{ $organisations->count() }}</h3>
 
-                            <p>Registered Locations</p>
+                            <p>Organisations(Registered/Belonging)</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
@@ -72,9 +72,9 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>65</h3>
+                            <h3>6</h3>
 
-                            <p>Independent Users</p>
+                            <p>Invites</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-pie-graph"></i>
@@ -86,13 +86,13 @@
             </div>
         </div>
         <div class="row">
-            <section class="col-lg-7 connectedSortable ui-sortable">
+            <section class="col-lg-7 connectedSortable ui-sortable ">
                 <!-- Custom tabs (Charts with tabs)-->
-                <div class="card">
+                <div class="card mx-2">
                     <div class="card-header ui-sortable-handle" style="cursor: move;">
                         <h3 class="card-title">
                             <i class="fas fa-chart-pie mr-1"></i>
-                            Progress
+                            Vehicle Location Histories
                         </h3>
                         <div class="card-tools">
                             <ul class="nav nav-pills ml-auto">
@@ -106,64 +106,59 @@
                         </div>
                     </div><!-- /.card-header -->
                     <div class="card-body">
-                      <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th style="width: 10px">#</th>
-                      <th>Task</th>
-                      <th>Progress</th>
-                      <th style="width: 40px">Label</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1.</td>
-                      <td>Update software</td>
-                      <td>
-                        <div class="progress progress-xs">
-                          <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-danger">55%</span></td>
-                    </tr>
-                    <tr>
-                      <td>2.</td>
-                      <td>Clean database</td>
-                      <td>
-                        <div class="progress progress-xs">
-                          <div class="progress-bar bg-warning" style="width: 70%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-warning">70%</span></td>
-                    </tr>
-                    <tr>
-                      <td>3.</td>
-                      <td>Cron job running</td>
-                      <td>
-                        <div class="progress progress-xs progress-striped active">
-                          <div class="progress-bar bg-primary" style="width: 30%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-primary">30%</span></td>
-                    </tr>
-                    <tr>
-                      <td>4.</td>
-                      <td>Fix and squish bugs</td>
-                      <td>
-                        <div class="progress progress-xs progress-striped active">
-                          <div class="progress-bar bg-success" style="width: 90%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-success">90%</span></td>
-                    </tr>
-                  </tbody>
-                </table>
+                        <table class="table table-bordered table-responsive-sm">
+                            <thead>
+                                <tr>
+                                    <th>Vehicle Name</th>
+                                    <th>Status</th>
+                                    <th style="width:15 px">long</th>
+                                    <th style="width:15 px">lat</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($vehicles as $item)
+
+                                    @if ($item->device == null)
+                                        <tr>
+                                            <td>{{ $item->vehicle_make }}</td>
+                                            <td>{{ $item->device->status ?? 'Not activated' }}</td>
+                                            <td>Not activated</td>
+                                            <td>Not activated</td>
+                                            <th>Not Subscribed</th>
+                                        </tr>
+                                    @else
+                                        @forelse ($item->device->location_history as $last_location)
+                                            <tr>
+                                                <td>{{ $item->vehicle_make }}</td>
+                                                <td>{{ $item->device->status ?? 'Not activated' }}</td>
+                                                <td>
+                                                    {{ $last_location->long ?? 'no assigned' }}
+                                                </td>
+                                                <td>{{ $last_location->lati ?? 'no assigned' }}</td>
+                                                <td><button type="button" class="btn btn-outline-primary btn-block"
+                                                        onclick="updatemap({{ $last_location->lati ?? 0 }},{{ $last_location->long ?? 0 }})"><i
+                                                            class="fa fa-map-marker" aria-hidden="true"></i>
+                                                        Locate</button>
+                                                </td>
+                                            </tr>
+
+                                        @empty
+                                        @endforelse
+                                    @endif
+
+
+                                @empty
+                                @endforelse
+
+                            </tbody>
+                        </table>
                     </div><!-- /.card-body -->
                 </div>
                 <!-- /.card -->
 
                 <!-- DIRECT CHAT -->
-                <div class="card direct-chat direct-chat-primary">
+                <div class="card direct-chat direct-chat-primary mx-2">
                     <div class="card-header ui-sortable-handle" style="cursor: move;">
                         <h3 class="card-title">Direct Chat</h3>
 
@@ -172,8 +167,7 @@
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                 <i class="fas fa-minus"></i>
                             </button>
-                            <button type="button" class="btn btn-tool" title="Contacts"
-                                data-widget="chat-pane-toggle">
+                            <button type="button" class="btn btn-tool" title="Contacts" data-widget="chat-pane-toggle">
                                 <i class="fas fa-comments"></i>
                             </button>
                             <button type="button" class="btn btn-tool" data-card-widget="remove">
@@ -192,8 +186,7 @@
                                     <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
                                 </div>
                                 <!-- /.direct-chat-infos -->
-                                <img class="direct-chat-img" src="dist/img/user1-128x128.jpg"
-                                    alt="message user image">
+                                <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image">
                                 <!-- /.direct-chat-img -->
                                 <div class="direct-chat-text">
                                     Is this template really for free? That's unbelievable!
@@ -379,56 +372,70 @@
             <section class="col-lg-5 connectedSortable ui-sortable">
 
                 <!-- Map card -->
-                <div class="card bg-gradient-primary">
+
+                <div class="card bg-gradient-info" style="position: relative; left: 0px; top: 0px;">
                     <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
                         <h3 class="card-title">
-                            <i class="fas fa-map-marker-alt mr-1"></i>
-                            Vehicle Locations
+                            <i class="fas fa-th mr-1"></i>
+                            Sales Graph
                         </h3>
-                        <!-- card tools -->
+
                         <div class="card-tools">
-                            <button type="button" class="btn btn-primary btn-sm daterange" title="Date range">
-                                <i class="far fa-calendar-alt"></i>
-                            </button>
-                            <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse"
-                                title="Collapse">
+                            <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
                                 <i class="fas fa-minus"></i>
                             </button>
+                            <button type="button" class="btn bg-info btn-sm" data-card-widget="remove">
+                                <i class="fas fa-times"></i>
+                            </button>
                         </div>
-                        <!-- /.card-tools -->
                     </div>
                     <div class="card-body">
                         <div id="map" style="height: 500px; width: 100%;">
                             <div id="panel"></div>
                         </div>
                     </div>
-                    <!-- /.card-body-->
+                    <!-- /.card-body -->
                     <div class="card-footer bg-transparent">
                         <div class="row">
                             <div class="col-4 text-center">
-                                <div id="sparkline-1"><canvas width="80" height="50"
-                                        style="width: 80px; height: 50px;"></canvas></div>
-                                <div class="text-white">Visitors</div>
+                                <div style="display:inline;width:60px;height:60px;"><canvas width="60"
+                                        height="60"></canvas><input type="text" class="knob"
+                                        data-readonly="true" value="20" data-width="60" data-height="60"
+                                        data-fgcolor="#39CCCC" readonly="readonly"
+                                        style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; appearance: none;">
+                                </div>
+
+                                <div class="text-white text-center">Mail-Orders</div>
                             </div>
                             <!-- ./col -->
                             <div class="col-4 text-center">
-                                <div id="sparkline-2"><canvas width="80" height="50"
-                                        style="width: 80px; height: 50px;"></canvas></div>
+                                <div style="display:inline;width:60px;height:60px;"><canvas width="60"
+                                        height="60"></canvas><input type="text" class="knob"
+                                        data-readonly="true" value="50" data-width="60" data-height="60"
+                                        data-fgcolor="#39CCCC" readonly="readonly"
+                                        style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; appearance: none;">
+                                </div>
+
                                 <div class="text-white">Online</div>
                             </div>
                             <!-- ./col -->
                             <div class="col-4 text-center">
-                                <div id="sparkline-3"><canvas width="80" height="50"
-                                        style="width: 80px; height: 50px;"></canvas></div>
-                                <div class="text-white">Sales</div>
+                                <div style="display:inline;width:60px;height:60px;"><canvas width="60"
+                                        height="60"></canvas><input type="text" class="knob"
+                                        data-readonly="true" value="30" data-width="60" data-height="60"
+                                        data-fgcolor="#39CCCC" readonly="readonly"
+                                        style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; appearance: none;">
+                                </div>
+
+                                <div class="text-white">In-Store</div>
                             </div>
                             <!-- ./col -->
                         </div>
                         <!-- /.row -->
                     </div>
+                    <!-- /.card-footer -->
                 </div>
-                <!-- /.card -->
             </section>
         </div>
-    </div>{{-- end of container-fluid --}}
+    </div>
 </div>

@@ -13,8 +13,10 @@ use App\Http\Livewire\Pages\Organisations\OrganisationLivewire;
 use App\Http\Livewire\Pages\Organisations\OrgUserLivewire;
 use App\Http\Livewire\Pages\Profile\ProfileLivewire;
 use App\Http\Livewire\Pages\Users\UsersLivewire;
+use App\Http\Livewire\Pages\Vehicles\AllVehiclesLivewire;
 use App\Http\Livewire\Pages\Vehicles\VehicleLivewire;
 use App\Http\Livewire\Pages\Vehicles\VehiclesLivewire;
+use App\Http\Livewire\Pages\Pansika\PansikaLivewire;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +35,7 @@ Route::get(
     [LandingController::class, 'index']
 )->name('landing');
 
+ Route::get('/pansika', PansikaLivewire::class)->name('pansika');
 
 Auth::routes(['verify' => true]);
 
@@ -45,18 +48,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/devices/device/location/{id}', LocationHistoryLivewire::class)->name('location.history');
         Route::get('/devices/device/{id}', DeviceLivewire::class)->name('device');
         Route::get('/devices/public/device/{id}', PublicDeviceLivewire::class)->name('public.device');
-        Route::get('/organisations/organisations', OrganisationsLivewire::class)->name('organisations');
+        // Route::get('/organisations', OrganisationsLivewire::class)->name('organisations');
         Route::get('/organisations/organisation/{id}', OrganisationLivewire::class)->name('organisation');
         Route::get('/organisations/organisation/{id}/users', OrgUserLivewire::class)->name('organisation.users');
+        Route::get('/home/vehicles', AllVehiclesLivewire::class)->name('all.vehicles');
         Route::get('/organisation/{id}/vehicles', VehiclesLivewire::class)->name('vehicles');
         Route::get('organisation/vehicles/vehicle/{id}', VehicleLivewire::class)->name('vehicle');
         Route::get('home/invites', InvitesLivewire::class)->name('invites');
+
     });
     Route::get('/home', DashboardLivewire::class)->name('home');
     Route::get('/profile', ProfileLivewire::class)->name('profile');
-    Route::get('/organisations/organisations', OrganisationsLivewire::class)->name('organisations');
+    Route::get('/organisations', OrganisationsLivewire::class)->name('organisations');
     Route::get('/organisations/organisation/{id}', OrganisationLivewire::class)->name('organisation');
     Route::get('/organisations/organisation/{id}/users', OrgUserLivewire::class)->name('organisation.users');
+    Route::get('/home/vehicles', AllVehiclesLivewire::class)->name('all.vehicles');
     Route::get('/organisation/{id}/vehicles', VehiclesLivewire::class)->name('vehicles');
     Route::get('organisation/vehicles/vehicle/{id}', VehicleLivewire::class)->name('vehicle');
     Route::get('home/invites', InvitesLivewire::class)->name('invites');

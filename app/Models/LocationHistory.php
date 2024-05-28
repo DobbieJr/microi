@@ -11,6 +11,7 @@ class LocationHistory extends Model
 
     public function device()
     {
-    return $this->belongsTo(Device::class);
+    return $this->belongsTo(Device::class, 'device_id');
     }
+
 }

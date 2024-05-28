@@ -58,7 +58,7 @@
 
                                     @forelse ($cars as $item)
                                         <tr>
-                                            <td scope="row">{{ $item->vehicle_name }}</td>
+                                            <td scope="row">{{ $item->vehicle_make }}</td>
                                             <td>{{ $item->vehicle_model }}</td>
                                             <td>2017</td>
                                             <td>Micromek</td>

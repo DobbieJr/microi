@@ -96,16 +96,16 @@ class OrganisationsLivewire extends Component
     public function render()
     {
         // $this->organisations = Organisation::all();
-        if (Auth::user()->role == 'normal') {
-            $orgs =  Organisation::join('user_organisations')
-                ->where('user_organisations.organisation_id', '=', 'organisations.id')
-                ->where('user_organisations.user_id',Auth::user()->id)
-                ->where('name', 'like', '%' . $this->search . '%')
+        if (Auth::user()->role == 'systems admin') {
+            $orgs =  Organisation::where('name', 'like', '%' . $this->search . '%')
                 ->orWhere('status', 'like', '%' . $this->search . '%')
                 ->paginate(3);
         } else {
-            $orgs =  Organisation::where('name', 'like', '%' . $this->search . '%')
-                ->orWhere('status', 'like', '%' . $this->search . '%')
+            $orgs =  Organisation::join('user_organisations', 'user_organisations.organisation_id', '=', 'organisations.id')
+                // ->where('user_organisations.organisation_id', '=', 'organisations.id')
+                ->where('user_organisations.user_id', Auth::user()->id)
+                ->where('name', 'like', '%' . $this->search . '%')
+                ->Where('status', 'like', '%' . $this->search . '%')
                 ->paginate(3);
         }
 

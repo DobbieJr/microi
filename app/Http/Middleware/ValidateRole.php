@@ -16,7 +16,7 @@ class ValidateRole
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->role == 'admin') {
+        if (Auth::user()->role == 'systems admin') {
             return $next($request);
         }else{
             return redirect()->back();

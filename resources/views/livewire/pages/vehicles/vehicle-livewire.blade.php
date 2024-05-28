@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">{{ $vehicle_name }}</h1>
+                    <h1 class="m-0">{{ $vehicle_make }}</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -16,7 +16,7 @@
         <div class="row">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Projects Detail</h3>
+                    <h3 class="card-title">Vehicle Details</h3>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -24,16 +24,39 @@
                             <div class="row">
                                 <div class="col-12 col-sm-4">
                                     <div class="info-box bg-info">
-                                        <span class="info-box-icon"><i class="far fa-calendar-alt"></i></span>
+                                        <span class="info-box-icon"><i class="fas fa-thermometer-half"></i></span>
 
                                         <div class="info-box-content">
-                                            <span class="info-box-text">Subscription Usage</span>
-                                            <span class="info-box-number">70%</span>
+                                            <span class="info-box-text">Overall Vehicle Condition</span>
+                                            <span class="info-box-number">{{ $vehicle_conditon }}%</span>
+                                            <div class="progress">
+                                                <div class="progress-bar" style="width:{{ $this->vehicle_conditon }}%">
+                                                </div>
+                                            </div>
+                                            <span class="progress-description">
+                                                @if ($this->vehicle_conditon >= 50)
+                                                    Good Condition
+                                                @else
+                                                    Critical Condition
+                                                @endif
+                                            </span>
+                                        </div>
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="info-box bg-info">
+
+                                        <span class="info-box-icon "><i class="fas fa-tachometer-alt"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Fuel Use</span>
+                                            <span class="info-box-number">12<sup>lt</sup></span>
+
                                             <div class="progress">
                                                 <div class="progress-bar" style="width: 70%"></div>
                                             </div>
                                             <span class="progress-description">
-                                                15 days left
+                                                30% Used since last refill
                                             </span>
                                         </div>
                                         <!-- /.info-box-content -->
@@ -44,32 +67,14 @@
                                         <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
 
                                         <div class="info-box-content">
-                                            <span class="info-box-text">Bookmarks</span>
-                                            <span class="info-box-number">41,410</span>
+                                            <span class="info-box-text">Subscription</span>
+                                            <span class="info-box-number ">10 days left</span>
 
                                             <div class="progress">
                                                 <div class="progress-bar" style="width: 70%"></div>
                                             </div>
                                             <span class="progress-description">
-                                                70% Increase in 30 Days
-                                            </span>
-                                        </div>
-                                        <!-- /.info-box-content -->
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-4">
-                                    <div class="info-box bg-info">
-                                        <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
-
-                                        <div class="info-box-content">
-                                            <span class="info-box-text">Bookmarks</span>
-                                            <span class="info-box-number">41,410</span>
-
-                                            <div class="progress">
-                                                <div class="progress-bar" style="width: 70%"></div>
-                                            </div>
-                                            <span class="progress-description">
-                                                70% Increase in 30 Days
+                                                70% Used
                                             </span>
                                         </div>
                                         <!-- /.info-box-content -->
@@ -89,6 +94,7 @@
                                                 <button type="button" class="btn btn-primary btn-sm daterange"
                                                     title="Date range">
                                                     <i class="far fa-calendar-alt"></i>
+                                                    Find
                                                 </button>
                                                 <button type="button" class="btn btn-primary btn-sm"
                                                     data-card-widget="collapse" title="Collapse">
@@ -202,36 +208,14 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- /.card-body-->
-                                        <div class="card-footer bg-transparent">
-                                            <div class="row">
-                                                <div class="col-4 text-center">
-                                                    <div id="sparkline-1"><canvas width="80" height="50"
-                                                            style="width: 80px; height: 50px;"></canvas></div>
-                                                    <div class="text-white">Visitors</div>
-                                                </div>
-                                                <!-- ./col -->
-                                                <div class="col-4 text-center">
-                                                    <div id="sparkline-2"><canvas width="80" height="50"
-                                                            style="width: 80px; height: 50px;"></canvas></div>
-                                                    <div class="text-white">Online</div>
-                                                </div>
-                                                <!-- ./col -->
-                                                <div class="col-4 text-center">
-                                                    <div id="sparkline-3"><canvas width="80" height="50"
-                                                            style="width: 80px; height: 50px;"></canvas></div>
-                                                    <div class="text-white">Sales</div>
-                                                </div>
-                                                <!-- ./col -->
-                                            </div>
-                                            <!-- /.row -->
-                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
-                            <h3 class="text-primary"><i class="fas fa-paint-brush"></i> {{ $vehicle_name }}</h3>
+                            <h3 class="text-primary"><i class="fas fa-paint-brush"></i> {{ $vehicle_make }}</h3>
                             <p class="text-muted">Raw denim you probably haven't heard of them jean shorts Austin.
                                 Nesciunt tofu
                                 stumptown aliqua butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi,
@@ -239,45 +223,12 @@
                                 terr.</p>
                             <br>
                             <div class="text-muted">
-                                <p class="text-sm">Client Company
-                                    <b class="d-block">Deveint Inc</b>
+                                <p class="text-sm">Organisation
+                                    <b class="d-block">{{ $this->vehicle->org->name ?? 'Personal Vehicle' }}</b>
                                 </p>
-                                <p class="text-sm">Project Leader
-                                    <b class="d-block">Tony Chicken</b>
+                                <p class="text-sm">Vehicle Driver
+                                    <b class="d-block">{{ Auth::user()->name }}</b>
                                 </p>
-                            </div>
-
-                            <h5 class="mt-5 text-muted">Project files</h5>
-                            <ul class="list-unstyled">
-                                <li>
-                                    <a href="" class="btn-link text-secondary"><i
-                                            class="far fa-fw fa-file-word"></i>
-                                        Functional-requirements.docx</a>
-                                </li>
-                                <li>
-                                    <a href="" class="btn-link text-secondary"><i
-                                            class="far fa-fw fa-file-pdf"></i>
-                                        UAT.pdf</a>
-                                </li>
-                                <li>
-                                    <a href="" class="btn-link text-secondary"><i
-                                            class="far fa-fw fa-envelope"></i>
-                                        Email-from-flatbal.mln</a>
-                                </li>
-                                <li>
-                                    <a href="" class="btn-link text-secondary"><i
-                                            class="far fa-fw fa-image "></i>
-                                        Logo.png</a>
-                                </li>
-                                <li>
-                                    <a href="" class="btn-link text-secondary"><i
-                                            class="far fa-fw fa-file-word"></i>
-                                        Contract-10_12_2014.docx</a>
-                                </li>
-                            </ul>
-                            <div class="text-center mt-5 mb-3">
-                                <a href="#" class="btn btn-sm btn-primary">Add files</a>
-                                <a href="#" class="btn btn-sm btn-warning">Report contact</a>
                             </div>
                         </div>
                     </div>

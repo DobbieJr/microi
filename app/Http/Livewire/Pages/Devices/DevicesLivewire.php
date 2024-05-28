@@ -18,7 +18,8 @@ class DevicesLivewire extends Component
     public $devices = [];
     public $button_status = 'add';
     public $device;
-    public $vehicle_name;
+    public $vehicle = [];
+    public $vehicle_make;
     public $vehicle_id;
     public $assign_d = false;
 
@@ -57,7 +58,7 @@ class DevicesLivewire extends Component
             'details',
             'button_status',
             'assign_d',
-            'vehicle_name'
+            'vehicle_make'
         ]);
     }
     public function add_device()
@@ -89,18 +90,22 @@ class DevicesLivewire extends Component
     }
     public function asign_vehicle()
     {
-        $this->validate(['vehicle_name' => 'required']);
-
-
-
+        $this->validate(['vehicle_make' => 'required']);
 
         AssignDevice::create([
             'user_id' => Auth::user()->id,
             'device_id' => $this->vehicle_id,
-            'vehicle_id' => DeviceVehicle::where('vehicle_name', $this->vehicle_name)->get()->value('id')
+            'vehicle_id' => DeviceVehicle::where('vehicle_make', $this->vehicle_make)->get()->value('id')
         ]);
-        $this->cancel();
+        $car_id = DeviceVehicle::where('vehicle_make', $this->vehicle_make)->get()->value('id');
+        $this->vehicle = DeviceVehicle::find($car_id);
+        $this->vehicle->device_id = AssignDevice::where('vehicle_id', $this->vehicle->id)->get()->value('device_id');
+        $this->vehicle->save();
         $this->alert('success', 'Updated successfully');
+        // adding device_id to vehicle
+
+        //.......
+        $this->cancel();
     }
     public function render()
     {

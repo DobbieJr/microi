@@ -16,4 +16,8 @@ class Device extends Model
     {
         return $this->hasOne(AssignDevice::class, 'device_id');
     }
+    public function location_history()
+    {
+        return $this->hasMany(LocationHistory::class, 'device_id');
+    }
 }

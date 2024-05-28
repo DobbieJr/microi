@@ -17,8 +17,8 @@
                         class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="{{ route('profile') }}" class="d-block">{{ Auth::user()->name }} <span
-                            class="badge bg-success">{{ Auth::user()->role }}</span></a>
+                    <a href="{{ route('profile') }}" class="d-block">{{ Auth::user()->name }}
+                        <span class="badge bg-success">{{ Auth::user()->role }}</span></a>
                 </div>
             </div>
 
@@ -74,15 +74,6 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('devices') }}" class="nav-link">
-                            <i class="nav-icon fa fa-car" aria-hidden="true"></i>
-                            <p>
-                                Devices
-
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a href="{{ route('organisations') }}" class="nav-link">
                             <i class="nav-icon fa fa-car" aria-hidden="true"></i>
                             <p>
@@ -92,7 +83,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('all.vehicles') }}" class="nav-link">
                             <i class="nav-icon fa fa-car" aria-hidden="true"></i>
                             <p>
                                 Vehicles
@@ -109,7 +100,16 @@
                             </p>
                         </a>
                     </li>
-                    @if (Auth::user()->role == 'admin')
+                    @if (Auth::user()->role == 'systems admin')
+                        <li class="nav-item">
+                            <a href="{{ route('devices') }}" class="nav-link">
+                                <i class="nav-icon fa fa-car" aria-hidden="true"></i>
+                                <p>
+                                    Devices
+
+                                </p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="{{ route('users') }}" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>

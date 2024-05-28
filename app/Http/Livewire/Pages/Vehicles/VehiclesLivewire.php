@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Pages\Vehicles;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Device;
 use App\Models\DeviceVehicle;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -27,7 +28,7 @@ class VehiclesLivewire extends Component
     public function open_modal($id = null)
     {
 
-        
+
         if ($id == null) {
             $this->title = "add";
         } else {
@@ -35,11 +36,10 @@ class VehiclesLivewire extends Component
             $this->car_id = $id;
             $vehicle = DeviceVehicle::find($id);
 
-            $this->car_name = $vehicle->vehicle_name;
+            $this->car_name = $vehicle->vehicle_make;
             $this->car_model = $vehicle->vehicle_model;
         }
         $this->add_car = true;
-        
     }
     public function cancel()
     {
@@ -53,7 +53,8 @@ class VehiclesLivewire extends Component
         ]);
         if ($this->car_id == null) {
             $car = DeviceVehicle::create([
-                'vehicle_name' => $this->car_name,
+                'user_id' => Auth::user()->id,
+                'vehicle_make' => $this->car_name,
                 'vehicle_model' => $this->car_model,
                 'organisation_id' => $this->org_id,
             ]);
@@ -61,7 +62,7 @@ class VehiclesLivewire extends Component
             $this->alert('success', 'Vehicle added successfully');
         } else {
             $vehicle = DeviceVehicle::find($this->car_id);
-            $vehicle->vehicle_name = $this->car_name;
+            $vehicle->vehicle_make = $this->car_name;
             $vehicle->vehicle_model = $this->car_model;
             $vehicle->save();
             $this->cancel();
@@ -71,7 +72,8 @@ class VehiclesLivewire extends Component
     public function render()
     {
 
-        $cars = DeviceVehicle::where('organisation_id', $this->org_id)->get();
+        $cars = DeviceVehicle::where('organisation_id', $this->org_id)
+            ->orWhere('user_id', $this->org_id)->get();
         return view('livewire.pages.vehicles.vehicles-livewire')->with('cars', $cars);
     }
 }

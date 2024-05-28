@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="{{ asset('landing page/css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('landing page/css/icomoon.css') }}">
     <link rel="stylesheet" href="{{ asset('landing page/css/style.css') }}">
-<link rel="stylesheet" href="{{asset('landing page/webfonts/uicons-solid-straight.css')}}">
+    <link rel="stylesheet" href="{{ asset('landing page/webfonts/uicons-solid-straight.css') }}">
 </head>
 
 <body data-spy="scroll" data-target="#navbar-example2" data-offset="0">
@@ -44,7 +44,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
                     <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
-                    {{-- <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li> --}}
+                    <li class="nav-item"><a href="{{route('pansika')}}" class="nav-link">Pansika</a></li>
                     {{-- <li class="nav-item"><a href="car.html" class="nav-link">Cars</a></li> --}}
                     <li class="nav-item"><a href="#team" class="nav-link">Team</a></li>
                     <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
@@ -53,7 +53,8 @@
                             <li class="nav-item px-1"><a href="{{ route('home') }}" class="btn btn-success">Dashboard</a>
                             </li>
                         @else
-                            <li class="nav-item"><a href="{{ route('login') }}" class="btn btn-sm btn-outline-success ">Log in</a>
+                            <li class="nav-item"><a href="{{ route('login') }}" class="btn btn-sm btn-outline-success ">Log
+                                    in</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item px-1"><a href="{{ route('register') }}"

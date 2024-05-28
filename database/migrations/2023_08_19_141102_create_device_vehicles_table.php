@@ -13,10 +13,17 @@ return new class extends Migration
     {
         Schema::create('device_vehicles', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
             $table->integer('organisation_id')->nullable();
             $table->integer('device_id')->nullable();
-            $table->string('vehicle_name');
+            $table->string('vehicle_make');
             $table->string('vehicle_model');
+            $table->integer('make_year');
+            $table->string('vin');
+            $table->integer('mileage');
+            $table->string('fuel_type');
+            $table->boolean('on_sale')->default(false);
+            $table->string('add_notes')->nullable();
             $table->timestamps();
         });
     }
